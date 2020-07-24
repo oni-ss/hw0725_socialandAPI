@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app0725.apps.App0725Config',
     'django.contrib.sites',
+    'imagekit',
 
     'allauth',
     'allauth.account',
