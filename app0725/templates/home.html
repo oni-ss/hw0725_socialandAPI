@@ -5,10 +5,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+      @font-face { font-family: 'netmarbleB'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.1/netmarbleB.woff') format('woff'); font-weight: normal; font-style: normal; }
+      @font-face { font-family: 'netmarbleL'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.1/netmarbleL.woff') format('woff'); font-weight: normal; font-style: normal; }
+    </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <title>간단한 지도 표시하기</title>
+    <title>시온이의 맛집 추천</title>
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ase4pwr7kt"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
@@ -17,7 +21,7 @@
 <body>
 <!---------------NAVBAR------------------>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{%url 'home'%}">Navbar</a>
+    <a class="navbar-brand" href="{%url 'home'%}">시온이의 맛집 추천</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,21 +31,21 @@
           <a class="nav-link" href="{%url 'home'%}">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/accounts/signup">회원가입</a>
+          <a class="nav-link" href="/accounts/signup">SignUp</a>
         </li>
         {%if user.is_authenticated%}
         <li class="nav-item">
-          <a class="nav-link" href="accounts/logout">로그아웃</a>
+          <a class="nav-link" href="accounts/logout">LogOut</a>
         </li>
         <li class="nav-item">
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{user.username}}님이 로그인 중입니다.</a>
         </li>
         {%else%}
         <li class="nav-item">
-            <a class="nav-link" href="{%provider_login_url 'google'%}">구글로그인</a>
+            <a class="nav-link" href="{%provider_login_url 'google'%}">Google Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">당신 로그인 해야됨</a>
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">공릉의 맛집을 구경해보세요 :)</a>
         </li>
         {%endif%}
       </ul>
@@ -54,25 +58,22 @@
 <div id="map" style="width:100%;height:400px;"></div>
 
 <script>
-var HOME_PATH = window.HOME_PATH || '.';
-
-var cityhall = new naver.maps.LatLng(37.5666805, 126.9784147),
+var gl = new naver.maps.LatLng(37.630686,127.0707851),
     map = new naver.maps.Map('map', {
-        center: cityhall.destinationPoint(0, 500),
+        center: gl.destinationPoint(0, 500),
         zoom: 15
     }),
     marker = new naver.maps.Marker({
         map: map,
-        position: cityhall
+        position: gl
     });
 
 var contentString = [
         '<div class="iw_inner">',
-        '   <h3>서울특별시청</h3>',
-        '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br />',
-        '       <img src="'+ HOME_PATH +'/img/example/hi-seoul.jpg" width="55" height="55" alt="서울시청" class="thumb" /><br />',
-        '       02-120 | 공공,사회기관 &gt; 특별,광역시청<br />',
-        '       <a href="http://www.seoul.go.kr" target="_blank">www.seoul.go.kr/</a>',
+        '   <h3 style="font-family: netmarbleB;">서울 노원구 공릉동</h3>',
+        '   <p style="font-family: netmarbleL;">공릉역, 태릉입구역, 화랑대역과 가까운 공릉 경춘선 숲길에 놀러오세요!<br />',
+        '       일식, 한식, 베이커리, 카페 등 맛집이 많답니다.<br />',
+        '       <a style="font-size:14px;" href="https://search.naver.com/search.naver?sm=top_hty&fbm=0&ie=utf8&query=%EA%B3%B5%EB%A6%89+%EB%A7%9B%EC%A7%91" target="_blank">네이버에서 공릉맛집 검색하기!</a>',
         '   </p>',
         '</div>'
     ].join('');
@@ -106,7 +107,8 @@ infowindow.open(map, marker);
 <!---------------CONTENTS------------------>
 
 <!-----------------WRITE------------------->
-<a href="{%url 'create'%}">글쓰기</a>
+<br><br>
+<a href="{%url 'create'%}"><button type="button" class="btn btn-light" style="font-family: 'netmarbleL'; border:medium solid #dbe2c7;">나도 공릉 맛집 추천하기</button></a>
 <!-----------------WRITE------------------->
 </body>
 </html>
