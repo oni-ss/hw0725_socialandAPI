@@ -5,6 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+      @font-face { font-family: 'netmarbleB'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.1/netmarbleB.woff') format('woff'); font-weight: normal; font-style: normal; }
+      @font-face { font-family: 'netmarbleL'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.1/netmarbleL.woff') format('woff'); font-weight: normal; font-style: normal; }
+    </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
@@ -16,7 +20,7 @@
 
 <body>
 <!---------------NAVBAR------------------>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-family: netmarbleL;">
     <a class="navbar-brand" href="{%url 'home'%}">시온이의 맛집 추천</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -41,14 +45,16 @@
 <!----------------NAVBAR------------------->
 
 <!---------------CONTENTS------------------>
-<form method="POST" action="{%url 'update' blog.id%}" enctype="multipart/form-data">
-    {%csrf_token%}
-    Title : <input class="form-control" type="text" name="t" value="{{blog.title}}"><br>
-    Image : <br><input type="file" name="p"><br><br>
-    Body : <br> <textarea class="form-control" rows="10" name="b">{{blog.body}}</textarea><br>
-    <br>
-    <input type="submit" value="수정">
-</form>
+<div class="container">
+  <form method="POST" action="{%url 'update' blog.id%}" enctype="multipart/form-data">
+      {%csrf_token%}
+      Title : <input class="form-control" type="text" name="t" value="{{blog.title}}"><br>
+      Image : <br><input type="file" name="p"><br><br>
+      Body : <br> <textarea class="form-control" rows="10" name="b">{{blog.body}}</textarea><br>
+      <br>
+      <input type="submit" value="수정">
+  </form>
+</div>
 <!---------------CONTENTS------------------>
 
 </body>

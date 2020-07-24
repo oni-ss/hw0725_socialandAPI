@@ -8,10 +8,10 @@ class Blog(models.Model):
     pub_date = models.DateTimeField('daet published')
     body = models.TextField()
 
-    image_thumbnail = ImageSpecField(source='image', processors=[ResizeToFill(240,150)])
+    image_thumbnail = ImageSpecField(source='image', processors=[ResizeToFill(360,360)])
 
     def __str__(self):
         return self.title
 
     def summary(self):
-        return self.body[:100]
+        return self.body[:60]

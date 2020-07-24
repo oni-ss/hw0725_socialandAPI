@@ -20,7 +20,7 @@
 
 <body>
 <!---------------NAVBAR------------------>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-family: netmarbleL;">
     <a class="navbar-brand" href="{%url 'home'%}">시온이의 맛집 추천</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -95,21 +95,82 @@ infowindow.open(map, marker);
 <!------------NAVER API-------------------->
 
 <!---------------CONTENTS------------------>
-{%for blog in blog%}
-<a href="{%url 'detail' blog.id%}"><h2>{{blog.title}}</h2></a>
-<h5>{{blog.pub_date}}</h5>
-<img src="{{blog.image_thumbnail.url}}" alt="tumbnail">
-<p>{{blog.body}}</p>
-<br>
-<a href="{%url 'update' blog.id%}">수정</a>
-<a href="{%url 'delete' blog.id%}">삭제</a>
-{%endfor%}
+<div class="album py-5 bg-light">
+  <div class="container">
+      <div class="row">
+        {%for blog in blog%}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img class="card-img-top" src="{{blog.image_thumbnail.url}}" alt="tumbnail" style="padding:15px;">
+            <div class="card-body">
+              <a href="{%url 'detail' blog.id%}"><h4 style="font-family: 'netmarbleB'; color:black;">{{blog.title}}</h4></a>
+              <hr><p class="card-text" style="font-family: 'netmarbleL';">{{blog.summary|linebreaksbr}}<br>...</p>
+              <a href="{%url 'update' blog.id%}"><button type="button" class="btn btn-light">수정</button></a>
+              <a href="{%url 'delete' blog.id%}"><button type="button" class="btn btn-light">삭제</button></a>
+            </div>
+          </div>
+        </div> 
+        {% endfor %}
+
+<!------------------내추천1----------------->
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-img-top" id="map1" style="width:100%;height:400px;"></div>
+            <script>
+            var map = new naver.maps.Map('map1', {
+              center: new naver.maps.LatLng(37.6201387,127.0742096),
+              zoom: 18
+              });
+
+            var marker = new naver.maps.Marker({
+              position: new naver.maps.LatLng(37.6201387,127.0742096),
+              map: map
+              });
+            </script>
+            <div class="card-body">
+              <h4 style="font-family: 'netmarbleB'; color:black;">공도</h4></a>
+              <hr><p class="card-text" style="font-family: 'netmarbleL';">스테이크덮밥 및 파스타<br>
+              퓨전한식 맛집이다. 태릉입구역이랑 가깝고 웨이팅도 가끔있다. 추천!</p>
+            </div>
+          </div>
+        </div> 
+<!------------------내추천1----------------->
+<!------------------내추천2----------------->
+<div class="col-md-4">
+  <div class="card mb-4 shadow-sm">
+    <div class="card-img-top" id="map2" style="width:100%;height:400px;"></div>
+    <script>
+    var map = new naver.maps.Map('map2', {
+      center: new naver.maps.LatLng(37.6245987,127.0721566),
+      zoom: 18
+      });
+
+    var marker = new naver.maps.Marker({
+      position: new naver.maps.LatLng(37.6245987,127.0721566),
+      map: map
+      });
+    </script>
+    <div class="card-body">
+      <h4 style="font-family: 'netmarbleB'; color:black;">오누이</h4></a>
+      <hr><p class="card-text" style="font-family: 'netmarbleL';">요거트를 파는 카페<br>
+      없을 것 같은 곳에 있는 요거트 맛집이다. 우리집에서도 가깝다. 추천!</p>
+    </div>
+  </div>
+</div> 
+</div>
+<!------------------내추천2----------------->
 <!---------------CONTENTS------------------>
 
 <!-----------------WRITE------------------->
 <br><br>
 <a href="{%url 'create'%}"><button type="button" class="btn btn-light" style="font-family: 'netmarbleL'; border:medium solid #dbe2c7;">나도 공릉 맛집 추천하기</button></a>
+</div>
+</div>
 <!-----------------WRITE------------------->
+
+
+
+
 </body>
 </html>
 
