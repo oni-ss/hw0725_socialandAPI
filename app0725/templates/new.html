@@ -1,0 +1,8 @@
+<form method="POST" action="{%url 'create'%}" enctype="multipart/form-data">
+    {%csrf_token%}
+    Title : <input type="text" class="form-control" name="t"><br>
+        Image : <br><input type="file" name="p"><br><br>
+        Text : <br> <textarea class="form-control" rows="10" name="b"></textarea><br>
+        <br>
+        <input type="submit" value="추천하기">
+</form>

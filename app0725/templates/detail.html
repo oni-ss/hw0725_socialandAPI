@@ -1,0 +1,52 @@
+{%load socialaccount%}
+{%providers_media_js%}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>간단한 지도 표시하기</title>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ase4pwr7kt"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+
+<body>
+<!---------------NAVBAR------------------>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{%url 'home'%}">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="{%url 'home'%}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        {%if user.is_authenticated%}
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{user.username}}님이 로그인 중입니다.</a>
+        </li>
+        {%else%}
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">당신 로그인 해야됨</a>
+        </li>
+        {%endif%}
+      </ul>
+    </div>
+</nav>
+<!----------------NAVBAR------------------->
+
+<!---------------CONTENTS------------------>
+<h2>{{blogs.title}}</h2>
+{{blogs.body|linebreaksbr}}
+<br><br>
+<a href="{%url 'update' blogs.id%}">수정</a>
+<a href="{%url 'delete' blogs.id%}">삭제</a>
+<!---------------CONTENTS------------------>
+
+</body>
+</html>
